@@ -1,0 +1,13 @@
+{
+    "name":"cfTOML",
+    "app":{
+        "cfengine":"adobe@2021"
+    },
+    "web":{
+        "http":{
+            "host":"0.0.0.0",
+            "port":"8128"
+        }
+    },
+    "openBrowser":true
+}

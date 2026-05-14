@@ -1,0 +1,42 @@
+{
+    "name":"cfTOML-boxlang-adobe",
+    "app":{
+        "cfengine":"boxlang@be"
+    },
+    "jvm":{
+        "javaHome":"C:\\Program Files\\Java\\jdk-24",
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''"
+        ],
+        "javaVersion":"openjdk21"
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":14001
+        }
+    },
+    "openBrowser":false,
+    "scripts":{
+        "onServerInitialInstall":"install bx-compat-cfml,bx-zip,bx-debug"
+    },
+    "boxlang":{
+        "compatibility":{
+            "adobe":true
+        },
+        "modules":{
+            "bx-compat-cfml":{
+                "enabled":true,
+                "engine":"adobe",
+                "clientManagement":true,
+                "nullIsUndefined":true,
+                "booleansAreNumbers":true,
+                "lenientJSONParsing":false,
+                "queryNullToEmpty":true
+            }
+        }
+    }
+}

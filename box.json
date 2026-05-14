@@ -1,0 +1,33 @@
+{
+    "name":"cfTOML",
+    "version":"1.2.0",
+    "author":"James Moberg",
+    "slug":"cftoml",
+    "type":"modules",
+    "location":"https://github.com/JamoCA/cfTOML/archive/v1.2.0.zip",
+    "shortDescription":"Pure CFML library for parsing and emitting TOML 1.2.0. Compatible with Adobe ColdFusion 2016+, Lucee 5+, BoxLang 1+.",
+    "homepage":"https://github.com/JamoCA/cfTOML",
+    "documentation":"https://github.com/JamoCA/cfTOML#readme",
+    "bugs":"https://github.com/JamoCA/cfTOML/issues",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/JamoCA/cfTOML"
+    },
+    "license":[
+        {
+            "type":"MIT",
+            "URL":"https://opensource.org/licenses/MIT"
+        }
+    ],
+    "ignore":[
+        "**/.*",
+        "tests",
+        "docs",
+        "tools",
+        "benchmark",
+        "lib",
+        "server.*.json",
+        "dump.cfm",
+		"PUBLISHING.md"
+    ]
+}

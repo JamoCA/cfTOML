@@ -1,0 +1,22 @@
+{
+    "name":"cfTOML-lucee5",
+    "app":{
+        "cfengine":"lucee@5"
+    },
+    "jvm":{
+        "javaHome":"C:\\CFusionExtra\\jdk\\jdk-11.0.25",
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''"
+        ]
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":13005
+        }
+    },
+    "openBrowser":false
+}

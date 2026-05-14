@@ -1,0 +1,23 @@
+{
+    "name":"cfTOML-boxlang",
+    "app":{
+        "cfengine":"boxlang@be"
+    },
+    "jvm":{
+        "javaHome":"C:\\Program Files\\Java\\jdk-24",
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''"
+        ],
+        "javaVersion":"openjdk21"
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":14000
+        }
+    },
+    "openBrowser":false
+}

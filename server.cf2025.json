@@ -1,0 +1,22 @@
+{
+    "name":"cfTOML-cf2025",
+    "app":{
+        "cfengine":"adobe@2025"
+    },
+    "jvm":{
+        "javaHome":"C:\\Program Files\\Java\\jdk-24",
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''"
+        ]
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":12025
+        }
+    },
+    "openBrowser":false
+}

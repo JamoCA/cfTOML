@@ -1,0 +1,24 @@
+{
+    "name":"cfTOML-cf2023",
+    "app":{
+        "cfengine":"adobe@2023"
+    },
+    "jvm":{
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''",
+            "--add-opens=java.base/sun.nio.cs=ALL-UNNAMED",
+            "--add-opens=java.naming/javax.naming.directory=ALL-UNNAMED",
+            "--add-opens=java.base/java.util.stream=ALL-UNNAMED"
+        ]
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":12023
+        }
+    },
+    "openBrowser":false
+}

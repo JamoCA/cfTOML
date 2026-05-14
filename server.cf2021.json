@@ -1,0 +1,21 @@
+{
+    "name":"cfTOML-cf2021",
+    "app":{
+        "cfengine":"adobe@2021"
+    },
+    "jvm":{
+        "args":[
+            "-D:javax.xml.accessExternalDTD=''",
+            "-D:javax.xml.accessExternalSchema=''",
+            "-D:javax.xml.accessExternalStylesheet=''"
+        ]
+    },
+    "web":{
+        "host":"0.0.0.0",
+        "HTTP":{
+            "enable":true,
+            "port":12021
+        }
+    },
+    "openBrowser":false
+}

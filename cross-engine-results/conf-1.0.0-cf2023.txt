@@ -1,0 +1,15 @@
+<pre>
+[ cfTOML conformance runner ]
+Corpus: BurntSushi/toml-test pinned (see tests/conformance/README.md)
+
+Spec: TOML 1.0.0
+Valid tests:
+
+Invalid tests:
+
+
+-------------------------------------------
+Valid tests: 182 passed, 0 failed
+Invalid tests: 371 passed, 0 failed
+Errors: 0
+</pre>

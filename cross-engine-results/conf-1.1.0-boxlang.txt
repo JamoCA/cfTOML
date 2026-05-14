@@ -1,0 +1,18 @@
+<pre>
+[ cfTOML conformance runner ]
+Corpus: BurntSushi/toml-test pinned (see tests/conformance/README.md)
+
+Spec: TOML 1.1.0
+
+Valid tests:
+  ERROR: \valid\inline-table\key-dotted-4.toml - cfTOML.DuplicateKeyError: Key 'T' already defined at line 3, column 1
+  ERROR: \valid\key\case-sensitive.toml - cfTOML.TypeError: Path walks into non-table value at 'section'
+
+Invalid tests:
+
+
+-------------------------------------------
+Valid tests: 185 passed, 0 failed
+Invalid tests: 361 passed, 0 failed
+Errors: 2
+</pre>

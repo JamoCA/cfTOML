@@ -1,0 +1,715 @@
+
+
+<pre>
+[ cfTOML test runner ]
+
+
+Skeleton: one equals one                 PASS
+Skeleton: true is true                   PASS
+
+Tokenizer: empty input yields zero tokens PASS
+
+Tokenizer: single LF yields one token    PASS
+Tokenizer: LF token type is NEWLINE      PASS
+Tokenizer: CRLF yields one token         PASS
+Tokenizer: CRLF token type is NEWLINE    PASS
+Tokenizer: two LFs yield two tokens      PASS
+
+Tokenizer: first newline at line 1       PASS
+Tokenizer: first newline at col 1        PASS
+Tokenizer: second newline at line 2      PASS
+Tokenizer: second newline at col 1       PASS
+
+Tokenizer: comment + newline yields 2 tokens PASS
+Tokenizer: first token is COMMENT        PASS
+Tokenizer: comment value includes the hash PASS
+Tokenizer: trailing newline after comment PASS
+Tokenizer: comment-only input yields 1 token PASS
+Tokenizer: comment-only is COMMENT       PASS
+Tokenizer: EOF comment value preserved   PASS
+
+
+Tokenizer: bare key yields 1 token       PASS
+Tokenizer: bare key type is KEY          PASS
+Tokenizer: bare key value is the identifier PASS
+Tokenizer: my-key_2 yields 1 token       PASS
+Tokenizer: my-key_2 type is KEY          PASS
+Tokenizer: my-key_2 preserves dashes/underscores/digits PASS
+
+Tokenizer: a.b yields 3 tokens           PASS
+Tokenizer: a.b first is KEY              PASS
+Tokenizer: a.b first value is 'a'        PASS
+Tokenizer: a.b middle is DOT             PASS
+Tokenizer: a.b last is KEY               PASS
+Tokenizer: a.b last value is 'b'         PASS
+Tokenizer: = yields 1 token              PASS
+Tokenizer: = type is EQUALS              PASS
+
+Tokenizer: true yields 1 token           PASS
+Tokenizer: true type is BOOL             PASS
+Tokenizer: true value is 'true'          PASS
+Tokenizer: false type is BOOL            PASS
+Tokenizer: false value is 'false'        PASS
+Tokenizer: 'truely' is KEY not BOOL      PASS
+Tokenizer: 'truely' value preserved      PASS
+
+Tokenizer: 42 yields 1 token             PASS
+Tokenizer: 42 type is INT                PASS
+Tokenizer: 42 value preserved            PASS
+Tokenizer: -7 type is INT                PASS
+Tokenizer: -7 value preserved            PASS
+Tokenizer: +99 type is INT               PASS
+Tokenizer: +99 value preserved           PASS
+Tokenizer: 1_000_000 type is INT         PASS
+Tokenizer: underscores preserved         PASS
+Tokenizer: 0 type is INT                 PASS
+
+Tokenizer: basic string yields 1 token   PASS
+Tokenizer: basic string type             PASS
+Tokenizer: basic string value excludes quotes PASS
+Tokenizer: empty basic string yields 1 token PASS
+Tokenizer: empty basic string type       PASS
+Tokenizer: empty basic string has empty value PASS
+Tokenizer: escaped quote yields 1 token  PASS
+Tokenizer: escaped quote type            PASS
+Tokenizer: escape sequences preserved raw PASS
+Tokenizer: double backslash preserved raw PASS
+
+
+Tokenizer: unterminated basic string throws ParseError PASS
+Tokenizer: basic string cannot span newline PASS
+
+Tokenizer: 'foo = 1' yields 3 tokens (KEY, EQUALS, INT) PASS
+Tokenizer: foo=1 first is KEY            PASS
+Tokenizer: foo=1 second is EQUALS        PASS
+Tokenizer: foo=1 third is INT            PASS
+Tokenizer: foo=1 INT value preserved     PASS
+Tokenizer: tab-separated yields 3 tokens PASS
+
+Tokenizer: KV line yields 4 tokens (KEY EQUALS STRING NEWLINE) PASS
+Tokenizer: KV first is KEY               PASS
+Tokenizer: KV key is 'title'             PASS
+Tokenizer: KV second is EQUALS           PASS
+Tokenizer: KV third is STRING_BASIC      PASS
+Tokenizer: KV string value preserved     PASS
+Tokenizer: KV fourth is NEWLINE          PASS
+Tokenizer: port=8080 yields 4 tokens     PASS
+Tokenizer: port value is INT             PASS
+Tokenizer: port value preserved          PASS
+Tokenizer: enabled value is BOOL         PASS
+Tokenizer: enabled value preserved       PASS
+Tokenizer: comment + KV yields 6 tokens  PASS
+Tokenizer: comment first                 PASS
+Tokenizer: newline after comment         PASS
+Tokenizer: KEY after comment             PASS
+
+Tokenizer: hex INT yields 1 token        PASS
+Tokenizer: hex INT type is INT           PASS
+Tokenizer: hex INT value preserves 0x prefix and case PASS
+Tokenizer: lowercase hex digits preserved PASS
+Tokenizer: mixed-case hex preserved      PASS
+Tokenizer: underscores in hex preserved  PASS
+Tokenizer: 0x0 preserved                 PASS
+
+Tokenizer: octal INT yields 1 token      PASS
+Tokenizer: octal INT type is INT         PASS
+Tokenizer: octal INT value preserved     PASS
+Tokenizer: underscores in octal preserved PASS
+Tokenizer: 0o0 preserved                 PASS
+
+Tokenizer: binary INT yields 1 token     PASS
+Tokenizer: binary INT type is INT        PASS
+Tokenizer: binary INT value preserved    PASS
+Tokenizer: underscores in binary preserved PASS
+Tokenizer: 0b0 preserved                 PASS
+
+Tokenizer: literal string yields 1 token PASS
+Tokenizer: literal string type           PASS
+Tokenizer: literal string value excludes quotes PASS
+Tokenizer: empty literal string yields 1 token PASS
+Tokenizer: empty literal string has empty value PASS
+Tokenizer: backslashes in literal string are literal PASS
+Tokenizer: literal string preserves embedded double-quote PASS
+Tokenizer: unterminated literal string throws ParseError PASS
+Tokenizer: literal string cannot span newline PASS
+
+Tokenizer: ML basic string yields 1 token PASS
+Tokenizer: ML basic string type          PASS
+Tokenizer: ML basic string content       PASS
+Tokenizer: leading newline after opening is trimmed PASS
+Tokenizer: leading CRLF after opening is trimmed PASS
+Tokenizer: embedded newlines preserved   PASS
+Tokenizer: single embedded double-quote preserved PASS
+Tokenizer: empty ML basic string         PASS
+Tokenizer: unterminated ML basic string throws PASS
+
+Tokenizer: ML literal string yields 1 token PASS
+Tokenizer: ML literal string type        PASS
+Tokenizer: ML literal string content     PASS
+Tokenizer: leading newline after opening trimmed PASS
+Tokenizer: ML literal preserves backslashes PASS
+Tokenizer: ML literal embedded newlines  PASS
+Tokenizer: unterminated ML literal throws PASS
+
+Tokenizer: 1.5 yields 1 token            PASS
+Tokenizer: 1.5 type is FLOAT             PASS
+Tokenizer: 1.5 value preserved           PASS
+Tokenizer: -0.001 type is FLOAT          PASS
+Tokenizer: -0.001 value preserved        PASS
+Tokenizer: float with underscores preserved PASS
+Tokenizer: 1.5 then newline yields 2 tokens PASS
+Tokenizer: 1.5 is FLOAT before newline   PASS
+Tokenizer: 42 still INT after FLOAT branch added PASS
+Tokenizer: 42 value preserved            PASS
+Tokenizer: 1.abc yields INT DOT KEY (3 tokens) PASS
+Tokenizer: 1.abc first is INT            PASS
+Tokenizer: 1.abc second is DOT           PASS
+Tokenizer: 1.abc third is KEY            PASS
+
+Tokenizer: 1e10 is FLOAT                 PASS
+Tokenizer: 1e10 value preserved          PASS
+Tokenizer: 1.5e+3 is FLOAT               PASS
+Tokenizer: 1.5e+3 value preserved        PASS
+Tokenizer: 2E-5 is FLOAT                 PASS
+Tokenizer: 2E-5 value preserved          PASS
+Tokenizer: 1e1_0 is FLOAT                PASS
+Tokenizer: 1e1_0 value preserved         PASS
+
+Tokenizer: inf type is FLOAT             PASS
+Tokenizer: inf value                     PASS
+Tokenizer: +inf type is FLOAT            PASS
+Tokenizer: +inf value                    PASS
+Tokenizer: -inf type is FLOAT            PASS
+Tokenizer: nan type is FLOAT             PASS
+Tokenizer: +nan type is FLOAT            PASS
+Tokenizer: -nan type is FLOAT            PASS
+Tokenizer: 'infinity' is KEY not FLOAT   PASS
+Tokenizer: 'infinity' value preserved    PASS
+
+Tokenizer: date yields 1 token           PASS
+Tokenizer: date type                     PASS
+Tokenizer: date value preserved          PASS
+Tokenizer: date + newline yields 2 tokens PASS
+Tokenizer: date type before newline      PASS
+Tokenizer: 4 digits without hyphen is INT PASS
+
+Tokenizer: time yields 1 token           PASS
+Tokenizer: time type                     PASS
+Tokenizer: time value preserved          PASS
+Tokenizer: time with fraction type       PASS
+Tokenizer: time with fraction value preserved PASS
+Tokenizer: long fractional seconds preserved PASS
+
+Tokenizer: datetime yields 1 token       PASS
+Tokenizer: datetime type                 PASS
+Tokenizer: datetime value preserved      PASS
+Tokenizer: lowercase-t datetime type     PASS
+Tokenizer: space-separator datetime type PASS
+Tokenizer: fractional datetime type      PASS
+Tokenizer: fractional datetime value     PASS
+
+Tokenizer: offset datetime yields 1 token PASS
+Tokenizer: Z offset datetime type        PASS
+Tokenizer: Z offset datetime value       PASS
+Tokenizer: lowercase-z offset datetime type PASS
+Tokenizer: +HH:MM offset datetime type   PASS
+Tokenizer: +HH:MM offset value           PASS
+Tokenizer: -HH:MM offset datetime type   PASS
+Tokenizer: -HH:MM offset value           PASS
+Tokenizer: fractional + offset preserved PASS
+
+Integration: 3-line config yields 12 tokens PASS
+Integration: title is KEY                PASS
+Integration: title value is STRING_BASIC PASS
+Integration: version is KEY              PASS
+Integration: version value is FLOAT      PASS
+Integration: version value preserved     PASS
+Integration: released is KEY             PASS
+Integration: released value is DATETIME_OFFSET PASS
+Integration: datetime value preserved    PASS
+Integration: color value is INT          PASS
+Integration: hex value preserved         PASS
+Integration: name value is STRING_LITERAL PASS
+Integration: literal string backslash preserved PASS
+Integration: limit value is FLOAT        PASS
+Integration: inf value                   PASS
+Integration: rate value is FLOAT         PASS
+Integration: nan value                   PASS
+
+Tokenizer: ML basic with 4 trailing quotes yields 1 token PASS
+Tokenizer: 4 trailing quotes type        PASS
+Tokenizer: 4 trailing quotes content has 1 quote PASS
+Tokenizer: ML basic with 5 trailing quotes yields 1 token PASS
+Tokenizer: 5 trailing quotes content has 2 quotes PASS
+Tokenizer: ML literal with 4 trailing quotes type PASS
+Tokenizer: 4 trailing literal quotes content PASS
+Tokenizer: 5 trailing literal quotes content PASS
+
+Tokenizer: [server] + newline yields 2 tokens PASS
+Tokenizer: TABLE_HEADER type             PASS
+Tokenizer: TABLE_HEADER value is path without brackets PASS
+Tokenizer: dotted TABLE_HEADER type      PASS
+Tokenizer: dotted TABLE_HEADER value     PASS
+Tokenizer: quoted-segment header type    PASS
+Tokenizer: quoted-segment header preserves quotes in value PASS
+Tokenizer: spaced header type            PASS
+Tokenizer: header preserves internal whitespace PASS
+Tokenizer: header at file start yields 1 token PASS
+Tokenizer: header-at-start type          PASS
+Tokenizer: unterminated TABLE_HEADER throws PASS
+
+Tokenizer: [[products]] + newline yields 2 tokens PASS
+Tokenizer: ARRAY_TABLE_HEADER type       PASS
+Tokenizer: ARRAY_TABLE_HEADER value is path without brackets PASS
+Tokenizer: dotted ARRAY_TABLE_HEADER type PASS
+Tokenizer: dotted ARRAY_TABLE_HEADER value PASS
+Tokenizer: unterminated ARRAY_TABLE_HEADER throws PASS
+Tokenizer: [a] is TABLE_HEADER           PASS
+Tokenizer: [[b]] is ARRAY_TABLE_HEADER   PASS
+
+Tokenizer: x = [] yields 4 tokens KEY EQUALS ARRAY_OPEN ARRAY_CLOSE PASS
+Tokenizer: x is KEY                      PASS
+Tokenizer: = is EQUALS                   PASS
+Tokenizer: [ after = is ARRAY_OPEN       PASS
+Tokenizer: ARRAY_OPEN value is literal [ PASS
+Tokenizer: ] is ARRAY_CLOSE              PASS
+Tokenizer: ARRAY_CLOSE value is literal ] PASS
+Tokenizer: x = [1] yields 5 tokens       PASS
+Tokenizer: single-elem ARRAY_OPEN        PASS
+Tokenizer: single-elem INT inside array  PASS
+Tokenizer: single-elem ARRAY_CLOSE       PASS
+Tokenizer: [server] at line-start depth 0 still TABLE_HEADER PASS
+Tokenizer: outer [ is ARRAY_OPEN         PASS
+Tokenizer: inner [ is ARRAY_OPEN, depth tracking works PASS
+Tokenizer: inner ARRAY_OPEN at line-start with depth>0 found PASS
+
+Tokenizer: x = [1,2,3] yields 9 tokens   PASS
+Tokenizer: first comma is COMMA          PASS
+Tokenizer: COMMA value is literal comma  PASS
+Tokenizer: second comma is COMMA         PASS
+Tokenizer: spaced array yields 9 tokens (whitespace skipped) PASS
+
+Tokenizer: x = {y = 1} yields 7 tokens   PASS
+Tokenizer: { is INLINE_OPEN              PASS
+Tokenizer: INLINE_OPEN value             PASS
+Tokenizer: } is INLINE_CLOSE             PASS
+Tokenizer: INLINE_CLOSE value            PASS
+Tokenizer: x = {} yields 4 tokens        PASS
+Tokenizer: empty inline {                PASS
+Tokenizer: empty inline }                PASS
+
+Strings: no-escape identity              PASS
+Strings: \n -> LF                        PASS
+Strings: \t -> TAB                       PASS
+Strings: \r -> CR                        PASS
+Strings: \b -> BS                        PASS
+Strings: \f -> FF                        PASS
+Strings: backslash-quote -> quote        PASS
+Strings: double-backslash -> single backslash PASS
+Strings: \\u0041 -> 'A'                  PASS
+Strings: \U00000041 -> 'A'               PASS
+Strings: mixed content                   PASS
+Strings: unknown escape sequence throws  PASS
+MLBasicEscapes: \n works                 PASS
+MLBasicEscapes: backslash-quote works    PASS
+MLBasicEscapes: backslash-LF skips whitespace PASS
+MLBasicEscapes: backslash-LF skips multiple newlines PASS
+MLBasicEscapes: backslash-trailing-space-LF skips PASS
+
+Numbers: 42 decimal                      PASS
+Numbers: -7 decimal                      PASS
+Numbers: zero                            PASS
+Numbers: underscores stripped            PASS
+Numbers: 0xFF -> 255                     PASS
+Numbers: lowercase hex                   PASS
+Numbers: 0xDEADBEEF                      PASS
+Numbers: 0o755 -> 493                    PASS
+Numbers: 0b101010 -> 42                  PASS
+Numbers: double underscore rejected in strict mode PASS
+Numbers: trailing underscore rejected in strict mode PASS
+Numbers: leading underscore rejected in strict mode PASS
+Numbers: non-strict accepts double underscore PASS
+Numbers: javalong mode returns java.lang.Long PASS
+Numbers: string mode returns decimal string PASS
+
+Datetime iso: offset datetime passthrough PASS
+Datetime iso: local datetime passthrough PASS
+Datetime iso: local date passthrough     PASS
+Datetime iso: local time passthrough     PASS
+Datetime javatime: offset datetime is OffsetDateTime PASS
+Datetime javatime: local datetime is LocalDateTime PASS
+Datetime javatime: local date is LocalDate PASS
+Datetime javatime: local time is LocalTime PASS
+Datetime cfdate: local date format       PASS
+Datetime cfdate: local time format       PASS
+Datetime: invalid input throws ParseError PASS
+Datetime cfdate: local datetime format   PASS
+Datetime cfdate: equal UTC instants in different offset forms produce equal local wall-clock PASS
+Datetime cfdate: space-separator datetime PASS
+Datetime cfdate: lowercase-t separator   PASS
+Datetime cfdate: 3-digit milliseconds preserved on local datetime PASS
+Datetime cfdate: 1-digit fractional second right-pads to 700ms PASS
+Datetime cfdate: sub-millisecond precision truncated to 3 digits PASS
+Datetime cfdate: milliseconds preserved on local time PASS
+Datetime cfdate: milliseconds preserved across offset-to-local conversion PASS
+
+Parser: empty input yields empty struct  PASS
+Parser: empty input yields a struct      PASS
+
+
+Parser: single KV yields 1 entry         PASS
+Parser: title key present                PASS
+Parser: title value decoded              PASS
+Parser: integer value                    PASS
+Parser: boolean true value               PASS
+Parser: float value                      PASS
+Parser: literal string value             PASS
+Parser: ML basic with decoded escape     PASS
+Parser: multi-KV first                   PASS
+Parser: multi-KV second                  PASS
+
+
+Parser: server table created             PASS
+Parser: server table is a struct         PASS
+Parser: server.host value                PASS
+Parser: first table host                 PASS
+Parser: second table host                PASS
+Parser: top-level KV before table        PASS
+Parser: table KV after top-level         PASS
+
+
+Parser: dotted header creates root.server PASS
+Parser: dotted header creates root.server.alpha PASS
+Parser: dotted header value placement    PASS
+Parser: a.b.x                            PASS
+Parser: a.c.y                            PASS
+
+
+Parser: dotted key at top level          PASS
+Parser: dotted key inside table          PASS
+Parser: bare key alongside dotted key    PASS
+Parser: dotted key alongside bare key    PASS
+
+
+Parser: duplicate top-level key throws DuplicateKeyError PASS
+Parser: duplicate key inside table throws DuplicateKeyError PASS
+Parser: same key in different tables - a.k PASS
+Parser: same key in different tables - b.k PASS
+
+
+Parser: redefining [a] throws DuplicateKeyError PASS
+Parser: implicit a promoted to explicit  PASS
+Parser: a.b retained after a promotion   PASS
+Parser: a then a.b - a.x                 PASS
+Parser: a then a.b - a.b.y               PASS
+
+
+Deserialize: port=8080                   PASS
+Deserialize: iso8601 mode returns string PASS
+
+
+E2E: title                               PASS
+E2E: version                             PASS
+E2E: server.host                         PASS
+E2E: server.port                         PASS
+E2E: server.enabled                      PASS
+E2E: server.config.timeout               PASS
+E2E: server.config.retries               PASS
+E2E: client.host                         PASS
+E2E: client.port                         PASS
+
+
+QPath: quoted segment with space         PASS
+QPath: value placed under quoted segment PASS
+QPath: dot inside quoted segment is literal PASS
+QPath: value under dotted-quoted segment PASS
+QPath: mixed bare and quoted segments    PASS
+QPath: mixed segments value              PASS
+QPath: literal-string segment preserves backslash PASS
+
+
+E2E: features.tags length                PASS
+E2E: features.tags[1]                    PASS
+E2E: features.tags[3]                    PASS
+E2E: features.counts[2]                  PASS
+E2E: features.endpoint.host              PASS
+E2E: features.endpoint.port              PASS
+E2E: products array length               PASS
+E2E: products[1].name                    PASS
+E2E: products[1].sku                     PASS
+E2E: products[2].name                    PASS
+E2E: products[2].suppliers length        PASS
+E2E: first supplier                      PASS
+E2E: second supplier                     PASS
+
+Arrays: empty array is CFML array        PASS
+Arrays: empty array length 0             PASS
+Arrays: single-element length            PASS
+Arrays: single-element value             PASS
+Arrays: three-element length             PASS
+Arrays: element 1                        PASS
+Arrays: element 2                        PASS
+Arrays: element 3                        PASS
+Arrays: string element 1                 PASS
+Arrays: string element 3                 PASS
+Arrays: bool true                        PASS
+Arrays: bool false                       PASS
+Arrays: trailing comma allowed           PASS
+Arrays: multi-line length                PASS
+Arrays: multi-line element               PASS
+Arrays: nested outer length              PASS
+Arrays: nested element is array          PASS
+Arrays: nested inner length              PASS
+Arrays: nested element access            PASS
+Arrays: mixed int                        PASS
+Arrays: mixed string                     PASS
+Arrays: mixed bool                       PASS
+Arrays: multi-line strings               PASS
+Arrays: multi-line string value          PASS
+
+Inline: empty inline table is struct     PASS
+Inline: empty inline table count         PASS
+Inline: point.x                          PASS
+Inline: point.y                          PASS
+Inline: mixed string                     PASS
+Inline: mixed int                        PASS
+Inline: mixed bool                       PASS
+Inline: dotted key creates sub-struct    PASS
+Inline: dotted key sibling               PASS
+Inline: nested inline table              PASS
+Inline: array of inline tables length    PASS
+Inline: array element 1                  PASS
+Inline: array element 2                  PASS
+Inline: array inside inline table        PASS
+Inline: array element inside inline table PASS
+Inline: dotted-key walk into inline table throws TypeError PASS
+Inline: [table.sub] header walking into inline table throws TypeError PASS
+Inline: trailing comma in inline table throws ParseError PASS
+
+AoT: root.products is array              PASS
+AoT: first occurrence creates array of length 1 PASS
+AoT: first element's KV                  PASS
+AoT: two occurrences yield array of 2    PASS
+AoT: first element name                  PASS
+AoT: second element name                 PASS
+AoT+sub: products[1].name                PASS
+AoT+sub: sub-table on last element       PASS
+AoT+sub: first entry color               PASS
+AoT+sub: second entry color              PASS
+AoT nested: parent struct created        PASS
+AoT nested: array under parent           PASS
+AoT nested: value                        PASS
+AoT: [[a]] then [a] throws TypeError     PASS
+AoT: [a] then [[a]] throws TypeError     PASS
+AoT: [[a]] after a = 1 throws (a is a scalar, can't become an array) PASS
+AoT: static array a = [1,2,3] then [[a]] throws TypeError PASS
+AoT cleanup: two elements created        PASS
+AoT cleanup: first element inline preserved PASS
+AoT cleanup: second element inline allowed (not blocked by stale inlineTables) PASS
+
+Emitter: empty struct yields empty string PASS
+Emitter: integer KV                      PASS
+Emitter: bool true KV                    PASS
+Emitter: bool false KV                   PASS
+Emitter: float KV                        PASS
+Emitter: negative integer                PASS
+Emitter: basic string                    PASS
+Emitter: multiple KV pairs in order      PASS
+Emitter: bare key with hyphen            PASS
+Emitter: quoted key with space           PASS
+Emitter: tab encoded as \\t              PASS
+Emitter: newline-containing value uses basic with \\n PASS
+Emitter: backslash string uses literal quotes PASS
+Emitter: double-quote in basic string is escaped PASS
+Emitter: empty string emitted as empty basic PASS
+Emitter: CFML date -> DATETIME_LOCAL (no zone) PASS
+Emitter: ISO 8601 STRING stays as quoted TOML string (no auto-coercion) PASS
+Emitter: java.time.OffsetDateTime        PASS
+Emitter: java.time.LocalDate             PASS
+Emitter: empty array                     PASS
+Emitter: integer array                   PASS
+Emitter: string array                    PASS
+Emitter: nested array                    PASS
+Emitter: mixed-type array                PASS
+Emitter: array of structs emits as AoT blocks (changed from Task 6 inline form) PASS
+Emitter: array of single empty struct emits as one [[items]] block PASS
+Emitter: top-level scalar + nested [server] block PASS
+Emitter: dotted-path table header        PASS
+Emitter: [server] then [server.config]   PASS
+Emitter: single AoT entry                PASS
+Emitter: two AoT entries                 PASS
+Emitter: nested AoT path                 PASS
+Emitter: sortKeys true alphabetizes      PASS
+Emitter: sortKeys default preserves insertion order PASS
+Emitter: indent tab under [header]       PASS
+Emitter: indent grows with depth         PASS
+Emitter: inlineThreshold=0 (default) uses [header] PASS
+Emitter: inlineThreshold=5 with 2-key struct emits inline PASS
+Emitter: struct exceeds threshold stays as [header] PASS
+Emitter: struct with nested struct stays as [header] regardless of threshold (no spurious [outer] header) PASS
+Emitter: onNull=skip default omits null  PASS
+Emitter: onNull=throw raises TypeError   PASS
+Emitter: onNull=emptyString emits empty  PASS
+Emitter: query without queryAsArrayOfTables throws TypeError PASS
+Emitter: query converts to AoT           PASS
+WriteFile: file created                  PASS
+WriteFile: file content matches expected PASS
+Fix1: backslash + newline forces basic-string variant PASS
+Fix2: non-whole float emits with decimal PASS
+Fix3: NaN emits as nan                   PASS
+Fix3: +Inf emits as inf                  PASS
+Fix3: -Inf emits as -inf                 PASS
+Fix4: quoted key escapes embedded double-quote PASS
+Fix5: emitInlineTable respects sortKeys  PASS
+P6-Fix: CFML date emits as DATETIME_LOCAL (no Z suffix) PASS
+P6-Fix: CFML datetime round-trips bit-for-bit PASS
+P6-Fix: UTC OffsetDateTime emits canonical Z PASS
+P6-Fix: Non-UTC OffsetDateTime keeps explicit offset PASS
+P6-Fix: OffsetDateTime preserves millisecond precision PASS
+P6-Fix: OffsetDateTime with zero ms emits without .000 PASS
+P6-Fix: LocalDateTime preserves millisecond precision PASS
+
+RoundTrip: integer                       PASS
+RoundTrip: boolean true                  PASS
+RoundTrip: boolean false                 PASS
+RoundTrip: float                         PASS
+RoundTrip: basic string                  PASS
+RoundTrip: empty array                   PASS
+RoundTrip: scalar array                  PASS
+RoundTrip: single table                  PASS
+RoundTrip: dotted table                  PASS
+RoundTrip: two tables                    PASS
+RoundTrip: AoT two entries               PASS
+RoundTrip: AoT with sub-table            PASS
+RoundTrip: mixed top-level + table + AoT PASS
+RoundTrip: array of inline tables        PASS
+
+
+RoundTrip E2E: basic.toml parse-emit-parse equality PASS
+
+
+TypedJson: integer                       PASS
+TypedJson: bool true                     PASS
+TypedJson: float                         PASS
+TypedJson: string                        PASS
+TypedJson: array length                  PASS
+TypedJson: array element 1 type          PASS
+TypedJson: array element 1 value         PASS
+TypedJson: table key present             PASS
+TypedJson: table value type              PASS
+TypedJson: table value                   PASS
+TypedJson: nested table parent           PASS
+TypedJson: nested string type            PASS
+TypedJson: datetime offset type          PASS
+TypedJson: datetime-local type           PASS
+TypedJson: date-local type               PASS
+TypedJson: time-local type               PASS
+
+SpecOption: default spec is 1.0.0        PASS
+SpecOption: per-call spec parses 1.0.0 syntax PASS
+SpecOption: instance default spec parses 1.0.0 syntax PASS
+SpecOption: per-call spec overrides instance default PASS
+SpecOption: unknown spec value throws cfTOML.ConfigError PASS
+
+
+SpecOption: knob inlineMultiline throws ConfigError under spec=1.0.0 PASS
+SpecOption: knob useExtendedEscapes throws ConfigError under spec=1.0.0 PASS
+SpecOption: knob omitZeroSeconds throws ConfigError under spec=1.0.0 PASS
+SpecOption: knob useBareDigitKeys throws ConfigError under spec=1.0.0 PASS
+SpecOption: knob inlineMultiline accepted under spec=1.1.0 PASS
+SpecOption: knob useExtendedEscapes accepted under spec=1.1.0 PASS
+SpecOption: knob omitZeroSeconds accepted under spec=1.1.0 PASS
+SpecOption: knob useBareDigitKeys accepted under spec=1.1.0 PASS
+
+Toml11Escapes: \e decodes to U+001B under 1.1.0 PASS
+Toml11Escapes: \e throws under 1.0.0     PASS
+Toml11Escapes: \e in multi-line basic under 1.1.0 PASS
+Toml11Escapes: \x41 decodes to A under 1.1.0 PASS
+Toml11Escapes: \xff decodes to U+00FF under 1.1.0 PASS
+Toml11Escapes: \xAb decodes to U+00AB under 1.1.0 PASS
+Toml11Escapes: \x412 decodes to 'A' then literal '2' under 1.1.0 PASS
+Toml11Escapes: invalid \xHH throws under 1.1.0 PASS
+Toml11Escapes: \x throws under 1.0.0     PASS
+Toml11Escapes: \x in multi-line basic under 1.1.0 PASS
+
+Toml11Escapes: truncated \x throws under 1.1.0 PASS
+
+Toml11DateTime: local time no-seconds -> :00 (iso8601) PASS
+Toml11DateTime: local datetime no-seconds -> :00 (iso8601) PASS
+Toml11DateTime: offset datetime no-seconds -> :00 (iso8601) PASS
+Toml11DateTime: cfdate hour from no-seconds time PASS
+Toml11DateTime: cfdate minute from no-seconds time PASS
+Toml11DateTime: cfdate second defaults to 0 PASS
+Toml11DateTime: 1.0.0 rejects no-seconds time PASS
+Toml11DateTime: 1.0.0 rejects no-seconds local datetime PASS
+Toml11DateTime: 1.1.0 with-seconds still parses PASS
+
+Toml11Keys: 1234 = 'value' under 1.1.0   PASS
+Toml11Keys: 007 = 'Bond' preserves leading zeros PASS
+Toml11Keys: foo.1234 dotted key          PASS
+Toml11Keys: inline-table all-digit key   PASS
+Toml11Keys: table header [1234]          PASS
+Toml11Keys: 1.0.0 accepts all-digit bare key PASS
+
+Toml11Inline: multi-line name            PASS
+Toml11Inline: multi-line email           PASS
+Toml11Inline: trailing comma a           PASS
+Toml11Inline: trailing comma b           PASS
+Toml11Inline: comment inside inline table PASS
+Toml11Inline: 1.1.0 single-line a        PASS
+Toml11Inline: 1.1.0 single-line b        PASS
+Toml11Inline: 1.0.0 rejects newline inside inline table PASS
+Toml11Inline: 1.0.0 rejects trailing comma PASS
+
+Toml11Emit: ESC emits as \e when useExtendedEscapes=true PASS
+Toml11Emit: U+001F emits as \x1f when useExtendedEscapes=true PASS
+Toml11Emit: ESC emits as \u001B when useExtendedEscapes=false PASS
+Toml11Emit: no \e emitted when useExtendedEscapes=false PASS
+Toml11Emit: useExtendedEscapes throws under spec=1.0.0 PASS
+Toml11Emit: named \t escape preserved with useExtendedEscapes PASS
+Toml11Emit: named \n escape preserved with useExtendedEscapes PASS
+
+
+Toml11Emit: LocalDateTime :00 omitted    PASS
+Toml11Emit: no explicit :00 emitted      PASS
+Toml11Emit: non-zero seconds preserved   PASS
+Toml11Emit: :00 preserved by default     PASS
+Toml11Emit: fractional seconds force :SS keep PASS
+Toml11Emit: OffsetDateTime :00 omitted with Z suffix PASS
+Toml11Emit: LocalTime :00 omitted        PASS
+Toml11Emit: LocalTime no trailing colon when omitted PASS
+
+
+Toml11Emit: all-digit key quoted by default under 1.1.0 PASS
+Toml11Emit: all-digit key bare when knob set PASS
+Toml11Emit: no quoting when knob set     PASS
+Toml11Emit: non-bare key quoted regardless of knob PASS
+Toml11Emit: round-trip 1234 key          PASS
+Toml11Emit: round-trip foo key           PASS
+
+
+Toml11Emit: short inline stays single-line PASS
+Toml11Emit: long inline opens { with newline PASS
+Toml11Emit: long inline closes } on its own line PASS
+Toml11Emit: knob off stays single-line   PASS
+Toml11Emit: round-trip after multi-line emit PASS
+
+SpecGating: 1.0.0 rejects feature multiline-inline-table PASS
+SpecGating: 1.0.0 rejects feature trailing-comma-inline PASS
+SpecGating: 1.0.0 rejects feature escape-e PASS
+SpecGating: 1.0.0 rejects feature escape-xHH PASS
+SpecGating: 1.0.0 rejects feature datetime-no-seconds-lt PASS
+SpecGating: 1.0.0 rejects feature datetime-no-seconds-ldt PASS
+SpecGating: 1.1.0 accepts feature multiline-inline-table PASS
+SpecGating: 1.1.0 accepts feature trailing-comma-inline PASS
+SpecGating: 1.1.0 accepts feature escape-e PASS
+SpecGating: 1.1.0 accepts feature escape-xHH PASS
+SpecGating: 1.1.0 accepts feature datetime-no-seconds-lt PASS
+SpecGating: 1.1.0 accepts feature datetime-no-seconds-ldt PASS
+
+
+
+-------------------------------------------
+619 passed, 0 failed, 0 errors
+</pre>
+

@@ -1,0 +1,21 @@
+.DS_Store
+Thumbs.db
+.engine/
+.cfconfig.json
+.bx-server/
+modules/
+.boxr/
+WEB-INF/
+*.log
+.idea/
+.vscode/
+.cfformat.json
+docs/
+lib/
+dump.cfm
+PUBLISHING.md
+
+# Per-engine dev server configs
+server.*.json
+tests/conformance/corpus/
+tests/conformance/corpus-1.1.0/
