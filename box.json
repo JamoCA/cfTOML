@@ -1,10 +1,10 @@
 {
     "name":"cfTOML",
-    "version":"1.2.0",
+    "version":"1.2.1",
     "author":"James Moberg",
     "slug":"cftoml",
     "type":"modules",
-    "location":"https://github.com/JamoCA/cfTOML/archive/v1.2.0.zip",
+    "location":"https://github.com/JamoCA/cfTOML/archive/v1.2.1.zip",
     "shortDescription":"Pure CFML library for parsing and emitting TOML 1.2.0. Compatible with Adobe ColdFusion 2016+, Lucee 5+, BoxLang 1+.",
     "homepage":"https://github.com/JamoCA/cfTOML",
     "documentation":"https://github.com/JamoCA/cfTOML#readme",
