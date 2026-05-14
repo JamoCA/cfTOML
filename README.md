@@ -2,8 +2,8 @@
 
 Pure CFML library for parsing and emitting [TOML 1.0.0](https://toml.io/en/v1.0.0). Cross-engine compatible across Adobe ColdFusion 2016+, Lucee 5+, and BoxLang 1+.
 
-[![ForgeBox Version](https://www.forgebox.io/api/v1/entry/toml/badges/version)](https://www.forgebox.io/view/toml)
-[![ForgeBox Downloads](https://www.forgebox.io/api/v1/entry/toml/badges/downloads)](https://www.forgebox.io/view/toml)
+[![ForgeBox Version](https://www.forgebox.io/api/v1/entry/cftoml/badges/version)](https://www.forgebox.io/view/cftoml)
+[![ForgeBox Downloads](https://www.forgebox.io/api/v1/entry/cftoml/badges/downloads)](https://www.forgebox.io/view/cftoml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Install
